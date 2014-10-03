@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+  
+ 
+<suite name="Suite1" verbose="1" >
+  <test name="Nopackage" >
+    <classes>
+       <class name="com.bugzilla.test.auth.BasicLoginLogout" />
+    </classes>
+  </test>
+  <test name="Nopackage1" >
+    <classes>
+       <class name="com.bugzilla.test.auth.BasicLoginLogout" />
+       <class name="com.bugzilla.test.bug.createNew.PlainVanila" />
+    </classes>
+  </test>
+</suite>
