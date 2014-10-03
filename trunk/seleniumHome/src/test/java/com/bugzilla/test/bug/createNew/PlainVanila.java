@@ -3,6 +3,7 @@ package com.bugzilla.test.bug.createNew;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 import com.bugzilla.gra.login.GRA_Login;
@@ -28,6 +29,10 @@ public class PlainVanila {
 		
 	}
     
-
+	@AfterTest
+	public void closeAll(){
+		local_webDriver.close();
+		local_webDriver.quit();
+	}
 
 }
