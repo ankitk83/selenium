@@ -4,20 +4,26 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.bugzilla.gra.login.GRA_Login;
 import com.bugzilla.gra.login.GRA_Logout;
 import com.bugzilla.gra.nav.TopNav.GRA_TopNav;
+import com.bugzilla.support.groups.BeforeTestClass;
 
-public class PlainVanila {
+@Test
+public class PlainVanila extends BeforeTestClass{
 	
+	@BeforeTest
+	public void callSuperClass(){
+		super.BeforeTestClass1();
+	}
 	WebDriver local_webDriver = new FirefoxDriver();
 
 	GRA_Login login = PageFactory.initElements(local_webDriver, GRA_Login.class);
 	GRA_TopNav topNav = PageFactory.initElements(local_webDriver, GRA_TopNav.class);
 	GRA_Logout logout = PageFactory.initElements(local_webDriver, GRA_Logout.class);
-	
 	
 	
 	@Test
@@ -36,3 +42,5 @@ public class PlainVanila {
 	}
 
 }
+
+
