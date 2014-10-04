@@ -9,16 +9,21 @@ import org.testng.annotations.Test;
 
 import com.bugzilla.gra.login.GRA_Login;
 import com.bugzilla.gra.login.GRA_Logout;
+import com.bugzilla.support.groups.BeforeTestClass;
 
-public class BasicLoginLogout {
+@Test
+public class BasicLoginLogout extends BeforeTestClass{
 	
-	
+
+//	@BeforeTest
+	public void callSuperClass(){
+		super.BeforeTestClass1();
+	}
+
 		WebDriver local_webDriver = new FirefoxDriver();
 		GRA_Login login = PageFactory.initElements(local_webDriver, GRA_Login.class);
 		GRA_Logout logout = PageFactory.initElements(local_webDriver, GRA_Logout.class);
 	
-	
-	@Test
 	public void BasicCheck(){
 		local_webDriver.get("http://10.0.0.20/bugzilla");
 		login.fn_plainLogin();
