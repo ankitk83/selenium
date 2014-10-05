@@ -1,5 +1,7 @@
 package com.bugzilla.test.auth;
 
+import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -9,10 +11,10 @@ import org.testng.annotations.Test;
 
 import com.bugzilla.gra.login.GRA_Login;
 import com.bugzilla.gra.login.GRA_Logout;
-import com.bugzilla.support.groups.BeforeTestClass;
+import com.bugzilla.support.groups.PreTestLoader;
 
 @Test
-public class BasicLoginLogout extends BeforeTestClass{
+public class BasicLoginLogout extends PreTestLoader{
 	
 
 //	@BeforeTest
@@ -24,9 +26,9 @@ public class BasicLoginLogout extends BeforeTestClass{
 		GRA_Login login = PageFactory.initElements(local_webDriver, GRA_Login.class);
 		GRA_Logout logout = PageFactory.initElements(local_webDriver, GRA_Logout.class);
 	
-	public void BasicCheck(){
+	public void BasicCheck() throws IOException{
 		local_webDriver.get("http://10.0.0.20/bugzilla");
-		login.fn_plainLogin();
+		login.fn_plainLogin(m1);
 		logout.fn_Logout();
 	}
     
