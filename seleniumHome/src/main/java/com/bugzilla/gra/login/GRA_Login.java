@@ -1,11 +1,19 @@
 package com.bugzilla.gra.login;
 
+import java.io.IOException;
+import java.util.HashMap;
+
+import com.bugzilla.support.groups.StaticURLs;
+import com.bugzilla.support.groups.PreTestLoader;
+import static com.bugzilla.support.groups.StringUtil.*;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.bugzilla.repository.login.OR_LoginLib.*;
+import static com.bugzilla.gra.login.OR_LoginLib.*;
 public class GRA_Login {
 	
+	PreTestLoader PTL = new PreTestLoader();
 	
 	//Login Link -- Login Page --s **
 	@FindBy(xpath=val_wl_login)
@@ -20,11 +28,16 @@ public class GRA_Login {
 	@FindBy(xpath=val_wb_login)
 	public WebElement wb_login;
 	
-	public void fn_plainLogin(){
+	public void fn_plainLogin(HashMap m1){
+//		String username = fn_fetchStringFromMap;
+		String UserName = (String) m1.get("UserName");
+		String Password = (String) m1.get("Password");
+		
 		wl_login.click();
-		we_username.sendKeys("ankit.kapoor83@gmail.com");
-		we_password.sendKeys("password");
+		we_username.sendKeys(UserName);
+		we_password.sendKeys(Password);
 		wb_login.click();
+		
 	}
 	
 	
