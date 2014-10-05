@@ -3,7 +3,7 @@ package com.bugzilla.gra.login;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.bugzilla.repository.login.OR_LoginLib.*;
+import static com.bugzilla.gra.login.OR_LoginLib.*;
 
 public class GRA_Logout {
 	
