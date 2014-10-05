@@ -1,6 +1,6 @@
 package com.bugzilla.gra.nav.TopNav;
 
-import static com.bugzilla.repository.Nav.TopNav.OR_TopNav.*;
+import static com.bugzilla.gra.nav.TopNav.OR_TopNav.*;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
