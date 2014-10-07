@@ -12,6 +12,7 @@ package com.bugzilla.test.bug.createNew;
 import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -36,18 +37,13 @@ public class PlainVanila extends PreTestLoader{
 	
 	@BeforeTest
 	public void callSuperClass(){
-		/*
-		 * load function from superClass which does following functions:
-		 * 	1. Property Values.
-		 * 	2. Sets Browser object.
-		 * 	3. TBD 
-		 */
-		BeforeTestClass1();
+		
+//		BeforeTestClass();
 		
 		/*
 		 * check loading of property values from subClass
 		 */
-		System.out.println("called in subclass" + Prop.getProperty("x1"));
+//		System.out.println("called in subclass" + Prop.getProperty("x1"));
 
 		//Get webDriver object based on Browser value set in TestNG.xml; 
 		oWebDriver = getBrowser();
