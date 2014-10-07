@@ -15,16 +15,17 @@ import com.bugzilla.support.groups.PreTestLoader;
 
 @Test
 public class BasicLoginLogout extends PreTestLoader{
-	
+	WebDriver local_webDriver ;
+	GRA_Login login;
+			GRA_Logout logout; 
 
-//	@BeforeTest
+	@BeforeTest
 	public void callSuperClass(){
-		super.BeforeTestClass1();
-	}
 
-		WebDriver local_webDriver = new FirefoxDriver();
-		GRA_Login login = PageFactory.initElements(local_webDriver, GRA_Login.class);
-		GRA_Logout logout = PageFactory.initElements(local_webDriver, GRA_Logout.class);
+		 local_webDriver = getBrowser();
+		 login = PageFactory.initElements(local_webDriver, GRA_Login.class);
+		 logout = PageFactory.initElements(local_webDriver, GRA_Logout.class);
+	}
 	
 	public void BasicCheck() throws IOException{
 		local_webDriver.get("http://10.0.0.20/bugzilla");
