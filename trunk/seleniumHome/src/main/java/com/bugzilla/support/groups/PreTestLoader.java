@@ -7,40 +7,29 @@ import java.io.InputStream;
 import java.util.*;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Optional;
+
+import com.google.common.base.CaseFormat;
 
 import static com.bugzilla.support.groups.StaticURLs.*;
 
 public class PreTestLoader {
 
-	public Properties Prop = new Properties();
-	InputStream InStream = null;
-	public String getProps(String propName) throws IOException{
-		
-		InStream = new FileInputStream("config.properties");
-		Prop.load(InStream);
-		return Prop.getProperty(propName);
-	
-	}
-	
-	/*
-	 * 
-	 */
+	private String oEnv;
+	private String oBrows;
+	private WebDriver BrowserDriver;
 	public static HashMap m1;
-	
-	
-	
-	/*
-	 * 
-	 */
 	public static WebDriver local_webDriver;
 	
 	
 	/*
 	 * 
 	 */
-	public static void tempA(){
+	public static void fn_loadTestData(){
 		m1 = new HashMap();
 		m1.put("UserName","ankit.kapoor83@gmail.com");
 		m1.put("Password","password");
@@ -62,29 +51,65 @@ public class PreTestLoader {
 	 * 
 	 */
 	@BeforeTest
-	public void getParams() throws IOException{
+	@Parameters({"environment","browser"})
+	public void getParams(@Optional String env, String brows) throws IOException{
 		System.out.println("called 1");
+//		System.out.println("called from beforetest:::" + env);
+		this.oEnv = env;
+		System.out.println("called from beforetest:::" + brows);
+		this.oBrows = brows;
 		//System.out.println(Prop);
+		System.out.println("class Name:" + this.getClass().getSimpleName() + "...");
+		System.out.println("[][]" + this.oBrows.toString().toUpperCase().trim()+ "[][]");
+		fn_setLoadBrowser();
+		fn_loadTestData();
+//		WebDriver c1 = new ChromeDriver();
+//		c1.get("http://www.google.com");
+
 	}
 	
 	
-	public WebDriver getBrowser(){
-		return new FirefoxDriver();
-	}
+	
 	
 	
 	/*
 	 * 
 	 */
-	public void BeforeTestClass1(){
-		
-//		PreTestLoader.local_webDriver = new FirefoxDriver();
+	public void BeforeTestClass(){
+//		
+//		fn_setLoadBrowser();
+//		fn_loadTestData();
+//		
+//		loadDataConnection();
 
-		System.out.println("class Name:" + this.getClass().getSimpleName() + "...");
-		System.out.println("called 2");
+//		System.out.println("class Name:" + this.getClass().getSimpleName() + "...");
+//		System.out.println(this.oBrows);
+//		System.out.println("called 2");
 		
-		tempA();
 		
+	}
+	
+	private void fn_setLoadBrowser(){
+		switch (this.oBrows.toString().toUpperCase().trim()) {
+		
+		case "FIREFOX":
+			this.BrowserDriver = new FirefoxDriver();		
+			break;
+
+			
+		case "CHROME":
+			System.setProperty("webdriver.chrome.driver","/Applications/Google Chrome.app/Contents/MacOS/chromedriver");
+			this.BrowserDriver = new ChromeDriver();		
+			break;
+			
+		default:
+			break;
+		}
+	}
+	
+	
+	public WebDriver getBrowser(){
+		return this.BrowserDriver;
 	}
 
 	
