@@ -5,10 +5,13 @@ import java.util.HashMap;
 
 import com.bugzilla.support.groups.StaticURLs;
 import com.bugzilla.support.groups.PreTestLoader;
+
 import static com.bugzilla.support.groups.StringUtil.*;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import static com.bugzilla.gra.login.OR_LoginLib.*;
 public class GRA_Login {
@@ -27,6 +30,11 @@ public class GRA_Login {
 	
 	@FindBy(xpath=val_wb_login)
 	public WebElement wb_login;
+	
+	
+	public GRA_Login(WebDriver localDriver){
+		PageFactory.initElements(localDriver, this);
+	}
 	
 	public void fn_plainLogin(HashMap m1){
 //		String username = fn_fetchStringFromMap;

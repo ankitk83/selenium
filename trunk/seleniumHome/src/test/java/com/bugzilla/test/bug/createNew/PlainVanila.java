@@ -38,20 +38,10 @@ public class PlainVanila extends PreTestLoader{
 	@BeforeTest
 	public void callSuperClass(){
 		
-//		BeforeTestClass();
-		
-		/*
-		 * check loading of property values from subClass
-		 */
-//		System.out.println("called in subclass" + Prop.getProperty("x1"));
-
-		//Get webDriver object based on Browser value set in TestNG.xml; 
 		oWebDriver = getBrowser();
-		
-		//Initiate objects for all GRAs.
-		oLogin = PageFactory.initElements(oWebDriver, GRA_Login.class);
-		oTopNav = PageFactory.initElements(oWebDriver, GRA_TopNav.class);
-		oLogout = PageFactory.initElements(oWebDriver, GRA_Logout.class);
+		oLogin = new GRA_Login(oWebDriver);
+		oTopNav = new GRA_TopNav(oWebDriver);
+		oLogout = new GRA_Logout(oWebDriver);
 	}
 	
 

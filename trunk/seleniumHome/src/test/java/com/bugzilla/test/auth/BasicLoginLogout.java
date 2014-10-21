@@ -17,14 +17,14 @@ import com.bugzilla.support.groups.PreTestLoader;
 public class BasicLoginLogout extends PreTestLoader{
 	WebDriver local_webDriver ;
 	GRA_Login login;
-			GRA_Logout logout; 
+	GRA_Logout logout; 
 
 	@BeforeTest
 	public void callSuperClass(){
 
 		 local_webDriver = getBrowser();
-		 login = PageFactory.initElements(local_webDriver, GRA_Login.class);
-		 logout = PageFactory.initElements(local_webDriver, GRA_Logout.class);
+		 login = new GRA_Login(local_webDriver);
+		 logout = new GRA_Logout(local_webDriver);
 	}
 	
 	public void BasicCheck() throws IOException{
