@@ -38,18 +38,6 @@ public class PreTestLoader {
 	
 	
 	
-	/*
-	 * 
-	 */
-//	public static String getVal(String keyItem){
-//		return (String) m1.get(keyItem);
-//	}
-	
-	
-
-	/*
-	 * 
-	 */
 	@BeforeTest
 	@Parameters({"environment","browser"})
 	public void getParams(@Optional String env, String brows) throws IOException{
@@ -58,7 +46,6 @@ public class PreTestLoader {
 		this.oEnv = env;
 		System.out.println("called from beforetest:::" + brows);
 		this.oBrows = brows;
-		//System.out.println(Prop);
 		System.out.println("class Name:" + this.getClass().getSimpleName() + "...");
 		System.out.println("[][]" + this.oBrows.toString().toUpperCase().trim()+ "[][]");
 		fn_setLoadBrowser();
@@ -69,25 +56,6 @@ public class PreTestLoader {
 	}
 	
 	
-	
-	
-	
-	/*
-	 * 
-	 */
-	public void BeforeTestClass(){
-//		
-//		fn_setLoadBrowser();
-//		fn_loadTestData();
-//		
-//		loadDataConnection();
-
-//		System.out.println("class Name:" + this.getClass().getSimpleName() + "...");
-//		System.out.println(this.oBrows);
-//		System.out.println("called 2");
-		
-		
-	}
 	
 	private void fn_setLoadBrowser(){
 		switch (this.oBrows.toString().toUpperCase().trim()) {
