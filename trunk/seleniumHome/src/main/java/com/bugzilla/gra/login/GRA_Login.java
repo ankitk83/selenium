@@ -34,6 +34,7 @@ public class GRA_Login {
 	
 	public GRA_Login(WebDriver localDriver){
 		PageFactory.initElements(localDriver, this);
+		System.out.println("****" + this.getClass().toString() + "*****");
 	}
 	
 	public void fn_plainLogin(HashMap m1){
