@@ -23,6 +23,8 @@ public class GRA_CreateBug {
 	
 	public GRA_CreateBug(WebDriver localDriver){
 		PageFactory.initElements(localDriver, this);
+		System.out.println("****" + this.getClass().toString() + "*****");
+
 	}
 	
 	public void fn_CreateBug(){
