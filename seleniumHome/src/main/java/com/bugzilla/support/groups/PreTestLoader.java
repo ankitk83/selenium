@@ -2,12 +2,17 @@ package com.bugzilla.support.groups;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.HashMap;
 
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
@@ -24,51 +29,70 @@ public class PreTestLoader extends GRALoader {
 	private String oEnv;
 	private String oBrows;
 	protected WebDriver BrowserDriver;
-	public static HashMap m1;
 	public WebDriver local_webDriver;
 	private String methodName;
+	public OverrideClass oc ;
+	
+	public EventFiringWebDriver eDriver;
+	private Platform platform;
 	
 	
 	
 	/*
 	 * 
 	 */
-	public static void fn_loadTestData(){
+	public void fn_loadTestData(){
 		m1 = new HashMap();
 		m1.put("UserName","ankit.kapoor83@gmail.com");
 		m1.put("Password","password");
 		
 	}
 	
-//	@BeforeMethod
-//	public void nameBefore(Method method)
-//	{
-//	    System.out.println("Test name: " + method.getName()); 
-//	    methodName = method.getName();
-//
-//	}
-//	
 	
 	@BeforeMethod
 	@Parameters({"environment","browser"})
-	public void fn_getParams(@Optional String env, String brows, Method method) throws IOException{
+	public void fn_getParams(@Optional String env, @Optional String brows, Method method) throws IOException{
 	    System.out.println("Test name: " + method.getName());
 	    methodName = method.getName();
-		System.out.println("called 1");
+	    
+	   platform = platform.LINUX;
+	    
+	    System.out.println("called 1");
 		this.oEnv = env;
 		System.out.println("called from beforetest:::" + brows);
 		this.oBrows = brows;
-//		System.out.println("class Name:" + this.getClass().getSimpleName() + "...");
-//		System.out.println("[][]" + this.oBrows.toString().toUpperCase().trim()+ "[][]");
-//		System.out.println(Thread.currentThread().getStackTrace());
+		fn_handleNullParams(env, brows);
+		System.out.println("class Name:" + this.getClass().getSimpleName() + "...");
+		System.out.println("[][]" + this.oBrows.toString().toUpperCase().trim()+ "[][]");
+		System.out.println("****" + Thread.currentThread().getStackTrace());
+		System.out.println("****" + Thread.currentThread().getId());
 //		System.out.println("--------------------");
-		fn_setLoadBrowser();
+//		fn_setLoadBrowser();
 		fn_loadTestData();
 //		fn_loadClasses(methodName);
-		fn_loadClasses(methodName,BrowserDriver);
+		
+		DesiredCapabilities capability = DesiredCapabilities.firefox();
+		capability.setBrowserName("firefox" );
+		// Set the platform we want our tests to run on     
+		capability.setPlatform(platform);
+		BrowserDriver = new RemoteWebDriver(new URL("http://10.0.0.20:4444/wd/hub"), capability);
+
+		setData(methodName);
+		eDriver  = new EventFiringWebDriver(this.BrowserDriver);
+		oc = new OverrideClass();
+		eDriver.register(oc);
+		fn_loadClasses(methodName,eDriver);
 
 	}
 	
+	private void fn_handleNullParams(String envVal, String browsVal){
+		if(envVal==null){
+			this.oEnv = "QA2";
+		}
+		if(browsVal==null){
+			this.oBrows = "Firefox";
+		}
+	}
 	
 	/*
 	private void fn_loadClasses(String methodName2) {
@@ -144,10 +168,16 @@ public class PreTestLoader extends GRALoader {
 	
 	@AfterMethod
 	public void closeAllItems(){
-		BrowserDriver.close();
+		eDriver.close();
+		eDriver.quit();
+		eDriver.unregister(oc);
+		
+		eDriver = null;
+		oc = null;
+//		BrowserDriver.close();
 		BrowserDriver = null;
-		graLogin = null;
-		graLogout = null;
+//		graLogin = null;
+//		graLogout = null;
 		
 	}
 	
