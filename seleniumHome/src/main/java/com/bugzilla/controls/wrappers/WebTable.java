@@ -1,4 +1,4 @@
-package com.bugzilla.support.groups;
+package com.bugzilla.controls.wrappers;
 
 import org.openqa.selenium.WebElement;
 
@@ -12,7 +12,8 @@ public class WebTable {
 	}
 	
 	public String getRowCount(){
-		return "test comments";
+//		return "test comments";
+		return null;
 		
 	}
 	
@@ -27,5 +28,6 @@ public class WebTable {
 	public void getRowWithCellData(String data){
 		
 	}
+	
 	
 }

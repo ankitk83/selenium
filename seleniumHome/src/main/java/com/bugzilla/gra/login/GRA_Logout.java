@@ -15,7 +15,7 @@ public class GRA_Logout {
 	
 	public GRA_Logout(WebDriver localDriver){
 		PageFactory.initElements(localDriver, this);
-		System.out.println("****" + this.getClass().toString() + "*****");
+//		System.out.println("****" + this.getClass().toString() + "*****");
 
 	}
 	
