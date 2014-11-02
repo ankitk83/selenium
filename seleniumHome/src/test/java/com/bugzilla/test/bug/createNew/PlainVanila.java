@@ -18,11 +18,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.bugzilla.global.values.StaticURLs;
 import com.bugzilla.gra.login.GRA_Login;
 import com.bugzilla.gra.login.GRA_Logout;
 import com.bugzilla.gra.nav.TopNav.GRA_TopNav;
 import com.bugzilla.support.groups.PreTestLoader;
-import com.bugzilla.support.groups.StaticURLs;
 
 
 public class PlainVanila extends PreTestLoader{
@@ -35,7 +35,8 @@ public class PlainVanila extends PreTestLoader{
 		BrowserDriver.get(StaticURLs.bugZillaHome);
 		
 		// Login
-		graLogin.fn_plainLogin(m1);
+		ts.testLoginAction(m1);
+//		graLogin.fn_plainLogin(m1);
 		
 		//Click on New link in top header
 		graTopNav.fn_navigateToNewBug();
