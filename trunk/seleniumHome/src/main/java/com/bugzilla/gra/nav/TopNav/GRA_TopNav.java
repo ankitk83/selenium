@@ -16,7 +16,7 @@ public class GRA_TopNav {
 	
 	public GRA_TopNav(WebDriver localDriver){
 		PageFactory.initElements(localDriver, this);
-		System.out.println("****" + this.getClass().toString() + "*****");
+//		System.out.println("****" + this.getClass().toString() + "*****");
 
 	}
 	

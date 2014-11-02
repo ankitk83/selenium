@@ -1,4 +1,6 @@
-package com.bugzilla.support.groups;
+package com.bugzilla.global.values;
+
+import com.bugzilla.support.groups.PreTestLoader;
 
 
 public class StaticURLs extends PreTestLoader{
