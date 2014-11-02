@@ -10,12 +10,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.bugzilla.global.values.StaticURLs;
 import com.bugzilla.gra.createbug.GRA_CreateBug;
 import com.bugzilla.gra.login.GRA_Login;
 import com.bugzilla.gra.login.GRA_Logout;
 import com.bugzilla.gra.nav.TopNav.GRA_TopNav;
 import com.bugzilla.support.groups.PreTestLoader;
-import com.bugzilla.support.groups.StaticURLs;
 
 
 public class CreateNewBug extends PreTestLoader{
@@ -25,7 +25,8 @@ public class CreateNewBug extends PreTestLoader{
 	@Test
 	public void CreateNewBug() throws IOException{
 		BrowserDriver.get(StaticURLs.bugZillaHome);
-		graLogin.fn_plainLogin(m1);
+		ts.testLoginAction(m1);
+//		graLogin.fn_plainLogin(m1);
 		graTopNav.fn_navigateToNewBug();
 		graCreateBug.fn_CreateBug();
 		graLogout.fn_Logout();
