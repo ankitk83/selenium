@@ -4,7 +4,7 @@ import static com.bugzilla.gra.createbug.OR_CreateBug.*;
 
 import com.bugzilla.controls.wrappers.WebEdit;
 import com.bugzilla.controls.wrappers.WebTable;
-import com.bugzilla.support.groups.PreTestLoader;
+import com.bugzilla.test.base.TestBase;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

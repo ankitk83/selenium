@@ -1,9 +1,9 @@
 package com.bugzilla.global.values;
 
-import com.bugzilla.support.groups.PreTestLoader;
+import com.bugzilla.test.base.TestBase;
 
 
-public class StaticURLs extends PreTestLoader{
+public class StaticURLs extends TestBase{
 	
 	
 	public final static String bugZillaHome = "http://10.0.0.20/bugzilla";

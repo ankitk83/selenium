@@ -67,6 +67,16 @@ public class commonClass {
 		m1.sendKeys(string);
 		System.out.println(string);
 	}
+	
+	public Boolean hasText(String TextForValidation){
+		String tempTextVal = m1.getText();
+		if(tempTextVal.contentEquals(TextForValidation) == true){
+			System.out.println("text exists...");
+		}
+		
+		return null;
+		
+	}
 
 	
 }
