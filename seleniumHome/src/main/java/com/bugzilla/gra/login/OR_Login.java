@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import com.bugzilla.controls.wrappers.WebEdit;
 import com.bugzilla.global.values.StaticURLs;
-import com.bugzilla.support.groups.PreTestLoader;
+import com.bugzilla.test.base.TestBase;
 
 import static com.bugzilla.support.groups.StringUtil.*;
 
@@ -16,14 +16,21 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
-import static com.bugzilla.gra.login.OR_LoginLib.*;
-
-public class GRA_Login {
+public class OR_Login {
 	
+	
+
+	final public static String val_wl_login 	= "//li/a[@id='login_link_top']";
+	final public static String val_we_username	= "//form/input[@id='Bugzilla_login_top']";
+	final public static String val_we_password	= "//form/input[@id='Bugzilla_password_top']";
+	final public static String val_wb_login		= "//form/input[@id='log_in_top']";
+//	final public static String val_wl_logout	= "//li/a[contains(@href,'logout')]";
+	final public static String val_wl_logout	= "//div[@id='common_links']/ul/li/a[@href='index.cgi?logout=1']";
+
 //	GRALoader cGlobalParams;
 	
 //	final WebDriver driver;
-	PreTestLoader PTL = new PreTestLoader();
+	TestBase PTL = new TestBase();
 	
 	//Login Link -- Login Page --s **
 	@FindBy(xpath=val_wl_login)
@@ -43,8 +50,12 @@ public class GRA_Login {
 	public WebEdit we_password;
 	private WebEdit elem;
 	
+	@FindBy(xpath=val_wl_logout)
+	WebElement wl_logout;
 	
-	public GRA_Login(WebDriver localDriver){
+	
+	
+	public OR_Login(WebDriver localDriver){
 //		this.driver = localDriver;
 		PageFactory.initElements(localDriver, this);
 //		System.out.println("****" + this.getClass().toString() + "*****");

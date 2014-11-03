@@ -1,4 +1,4 @@
-package com.bugzilla.support.groups;
+package com.bugzilla.test.base;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -11,21 +11,35 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
+
+
+
+
+
 import com.bugzilla.gra.createbug.GRA_CreateBug;
-import com.bugzilla.gra.login.GRA_Login;
-import com.bugzilla.gra.login.GRA_Logout;
+import com.bugzilla.gra.login.GRA_LoginLogout;
 import com.bugzilla.gra.nav.TopNav.GRA_TopNav;
+import com.bugzilla.gra.searchbug.GRA_SearchBug;
 //import com.bugzilla.gra.login.GRA_Logout;
 import com.bugzilla.listerner.overrides.OverrideClass;
 
-public class PreTestLoader extends GRALoader {
+public class TestBase  {
+	
+	
+	public GRA_LoginLogout graLoginLogout;
+//	
+//	public OR_Login graLogin;
+	public GRA_TopNav graTopNav;
+	public GRA_CreateBug graCreateBug;
+	public GRA_SearchBug graSearchBug;
+//	public GRA_LoginLogout ts;
+	
 
 	private String oEnv;
 	private String oBrows;
@@ -36,6 +50,7 @@ public class PreTestLoader extends GRALoader {
 	
 	public EventFiringWebDriver eDriver;
 	private Platform platform;
+	public HashMap<String, String> m1 = new HashMap<String, String>();
 	
 	
 	
@@ -78,11 +93,11 @@ public class PreTestLoader extends GRALoader {
 		capability.setPlatform(platform);
 		BrowserDriver = new RemoteWebDriver(new URL("http://10.0.0.20:4444/wd/hub"), capability);
 
-		setData(methodName);
+//		setData(methodName);
 		eDriver  = new EventFiringWebDriver(this.BrowserDriver);
 		oc = new OverrideClass();
 		eDriver.register(oc);
-		fn_loadClasses(methodName,eDriver);
+//		fn_loadClasses(methodName,eDriver);
 
 	}
 	

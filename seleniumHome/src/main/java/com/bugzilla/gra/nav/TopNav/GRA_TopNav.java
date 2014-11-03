@@ -11,8 +11,12 @@ public class GRA_TopNav {
 	
 	@FindBy(xpath=val_wl_newBug)
 	WebElement wl_newBug;
+	
 	@FindBy(xpath=val_wl_search)
 	WebElement wl_search;
+	
+	@FindBy(xpath=val_txt_loginUserName)
+	WebElement txt_loginUserName;
 	
 	public GRA_TopNav(WebDriver localDriver){
 		PageFactory.initElements(localDriver, this);
