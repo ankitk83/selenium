@@ -17,28 +17,20 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-
-
-
-
-
+import com.bugzilla.global.values.RemoteMangement;
 import com.bugzilla.gra.createbug.GRA_CreateBug;
 import com.bugzilla.gra.login.GRA_LoginLogout;
 import com.bugzilla.gra.nav.TopNav.GRA_TopNav;
 import com.bugzilla.gra.searchbug.GRA_SearchBug;
-//import com.bugzilla.gra.login.GRA_Logout;
 import com.bugzilla.listerner.overrides.OverrideClass;
 
 public class TestBase  {
 	
 	
 	public GRA_LoginLogout graLoginLogout;
-//	
-//	public OR_Login graLogin;
 	public GRA_TopNav graTopNav;
 	public GRA_CreateBug graCreateBug;
 	public GRA_SearchBug graSearchBug;
-//	public GRA_LoginLogout ts;
 	
 
 	private String oEnv;
@@ -50,19 +42,8 @@ public class TestBase  {
 	
 	public EventFiringWebDriver eDriver;
 	private Platform platform;
-	public HashMap<String, String> m1 = new HashMap<String, String>();
-	
-	
-	
-	/*
-	 * 
-	 */
-	public void fn_loadTestData(){
-		m1 = new HashMap();
-		m1.put("UserName","ankit.kapoor83@gmail.com");
-		m1.put("Password","password");
-		
-	}
+	private String host;
+	public static HashMap<String, String> m1 = new HashMap<String, String>();
 	
 	
 	@BeforeMethod
@@ -71,27 +52,59 @@ public class TestBase  {
 	    System.out.println("Test name: " + method.getName());
 	    methodName = method.getName();
 	    
-	   platform = platform.LINUX;
+	   
 	    
-	    System.out.println("called 1");
+//	    System.out.println("called 1");
 		this.oEnv = env;
-		System.out.println("called from beforetest:::" + brows);
+//		System.out.println("called from beforetest:::" + brows);
 		this.oBrows = brows;
 		fn_handleNullParams(env, brows);
-		System.out.println("class Name:" + this.getClass().getSimpleName() + "...");
-		System.out.println("[][]" + this.oBrows.toString().toUpperCase().trim()+ "[][]");
-		System.out.println("****" + Thread.currentThread().getStackTrace());
-		System.out.println("****" + Thread.currentThread().getId());
+//		System.out.println("class Name:" + this.getClass().getSimpleName() + "...");
+//		System.out.println("[][]" + this.oBrows.toString().toUpperCase().trim()+ "[][]");
+//		System.out.println("****" + Thread.currentThread().getStackTrace());
+//		System.out.println("****" + Thread.currentThread().getId());
+		String sa = Long.toString(Thread.currentThread().getId());
+		this.m1.put("SessionID", sa);
+		this.m1.put("TestName", methodName);
+		System.out.println("Session ID is : " + m1.get("SessionID"));
+		sa = "";
+//		this.m1.put(methodName, oBrows);
 //		System.out.println("--------------------");
 //		fn_setLoadBrowser();
-		fn_loadTestData();
+//		fn_loadTestData();
 //		fn_loadClasses(methodName);
+		RemoteMangement rm1 = new RemoteMangement();
 		
-		DesiredCapabilities capability = DesiredCapabilities.firefox();
-		capability.setBrowserName("firefox" );
+		DesiredCapabilities capability  = new DesiredCapabilities();//= DesiredCapabilities.firefox();
+		capability.setBrowserName(this.oBrows);
+		String CapabilityURL = rm1.getEnvVars(this.oBrows);
+		platform = rm1.getPlatform(CapabilityURL);		
+
+//		platform = platform.LINUX; // also to be set dynamically
+//		platform = platform.WINDOWS; // also to be set dynamically
+		
+		
+//		System.out.println(rm1.getEnvVars(this.oBrows));
+//		String remoteHostIP = rm1.getEnvVars(this.oBrows);
+//		System.out.println(remoteHostIP);
+		System.out.println(CapabilityURL);
+		
 		// Set the platform we want our tests to run on     
 		capability.setPlatform(platform);
-		BrowserDriver = new RemoteWebDriver(new URL("http://10.0.0.20:4444/wd/hub"), capability);
+		System.out.println(capability.getBrowserName());
+		BrowserDriver = new RemoteWebDriver(new URL("http://" + CapabilityURL + ":4444/wd/hub"), capability);
+		
+		
+		/*
+		 * this implementation did not work. a seperate util funciton has to be written to identify the driver host.
+		 */
+//		BrowserDriver = new RemoteWebDriver(new URL("http://127.0.0.1"), capability); 
+		
+		
+		/*
+		 * this code works fine. all we need to do is include this in the function to handle local/remote host assignments
+		 */
+
 
 //		setData(methodName);
 		eDriver  = new EventFiringWebDriver(this.BrowserDriver);
@@ -106,62 +119,12 @@ public class TestBase  {
 			this.oEnv = "QA2";
 		}
 		if(browsVal==null){
-			this.oBrows = "Firefox";
+			this.oBrows = "firefox";
+//			this.host = "localhost";
 		}
+		
 	}
 	
-	/*
-	private void fn_loadClasses(String methodName2) {
-		switch(methodName){
-		case "BasicLoginLogout":
-			System.out.println("Null Check before" + graLogout==null);
-
-			graLogin = PageFactory.initElements(BrowserDriver, GRA_Login.class);
-			graLogout = PageFactory.initElements(BrowserDriver, GRA_Logout.class);
-			System.out.println("loaded from GRALOADER:::::::" + methodName);
-			System.out.println("Null Check after" + graLogout==null);
-
-			break;
-			
-	case "PlainVanila":
-			System.out.println("Null Check before" + graLogout==null);
-		graLogin = PageFactory.initElements(BrowserDriver, GRA_Login.class);
-		graLogout = PageFactory.initElements(BrowserDriver, GRA_Logout.class);
-		graTopNav = PageFactory.initElements(BrowserDriver, GRA_TopNav.class);
-			System.out.println("loaded" + methodName);
-			System.out.println("Null Check after" + graLogout==null);
-	
-		break;
-		
-		case "CreateNewBug":
-			System.out.println("Null Check before" + graLogout==null);
-
-			graLogin = PageFactory.initElements(BrowserDriver, GRA_Login.class);
-			graLogout = PageFactory.initElements(BrowserDriver, GRA_Logout.class);
-			graTopNav = PageFactory.initElements(BrowserDriver, GRA_TopNav.class);
-			graCreateBug = PageFactory.initElements(BrowserDriver, GRA_CreateBug.class);
-			System.out.println("loaded" + methodName);
-			System.out.println("Null Check after" + graLogout==null);
-
-		break;
-		
-
-		
-		case "PlainSearch":
-			
-			graLogin = PageFactory.initElements(BrowserDriver, GRA_Login.class);
-			graLogout = PageFactory.initElements(BrowserDriver, GRA_Logout.class);
-			graTopNav = PageFactory.initElements(BrowserDriver, GRA_TopNav.class);
-			System.out.println("loaded" + methodName);
-			System.out.println("Null Check after" + graLogout==null);
-
-		break;
-		
-		
-		}
-			
-	}
-*/
 	private void fn_setLoadBrowser(){
 		switch (this.oBrows.toString().toUpperCase().trim()) {
 		
@@ -192,6 +155,7 @@ public class TestBase  {
 		oc = null;
 //		BrowserDriver.close();
 		BrowserDriver = null;
+		platform = null;
 //		graLogin = null;
 //		graLogout = null;
 		
