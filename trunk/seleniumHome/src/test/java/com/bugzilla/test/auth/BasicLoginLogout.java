@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 
 import com.bugzilla.global.values.StaticURLs;
 import com.bugzilla.test.base.AuthenticationBase;
-import com.bugzilla.test.base.TestBase;
 
 
 public class BasicLoginLogout extends AuthenticationBase{

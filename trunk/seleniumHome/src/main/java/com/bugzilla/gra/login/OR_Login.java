@@ -26,6 +26,9 @@ public class OR_Login {
 	final public static String val_wb_login		= "//form/input[@id='log_in_top']";
 //	final public static String val_wl_logout	= "//li/a[contains(@href,'logout')]";
 	final public static String val_wl_logout	= "//div[@id='common_links']/ul/li/a[@href='index.cgi?logout=1']";
+	
+	final public static String val_weel_loginWelcome = "//div[@id='welcome-admin']/p[contains(text(),'Welcome')]";
+
 
 //	GRALoader cGlobalParams;
 	
@@ -44,6 +47,9 @@ public class OR_Login {
 	
 	@FindBy(xpath=val_wb_login)
 	public WebElement wel_wb_login;
+	
+	@FindBy(xpath =val_weel_loginWelcome)
+	public WebElement weel_txt_LoginWelcome;
 
 	public WebEdit we_username;
 

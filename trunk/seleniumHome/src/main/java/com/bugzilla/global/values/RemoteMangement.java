@@ -66,7 +66,7 @@ public class RemoteMangement {
 
 		switch (firefoxNodeNumber){
 	case 1:
-		firefoxIP = "10.0.0.4";
+		firefoxIP = "10.0.0.20";
 		break;
 	case 2:
 		firefoxIP = "10.0.0.20";

@@ -2,6 +2,8 @@ package com.bugzilla.controls.wrappers;
 
 import org.openqa.selenium.WebElement;
 
+import bsh.This;
+
 public class WebEdit extends commonClass {
 
 	WebElement elemLocal;
@@ -10,8 +12,8 @@ public class WebEdit extends commonClass {
 	
 	public WebEdit(WebElement elementRef){
 		System.out.println(this.getClass().getClassLoader().getParent().toString() + " called webedit");
-		super.m1 = elementRef;
-		this.elemLocal = super.m1;
+		super.e1 = elementRef;
+		this.elemLocal = super.e1;
 	}
 	
 	public String getRowCount(){
@@ -27,7 +29,7 @@ public class WebEdit extends commonClass {
 //		System.out.println("0000-" + elemLocal);
 //		System.out.println(cls.getInstanceHashCodes().toString());
 //		System.out.println("");
-		m1.sendKeys(string);
+		e1.sendKeys(string);
 		System.out.println(string);
 //		System.out.println(Thread.currentThread().getName() + "THREADSSSSS");
 //		System.out.println(Thread.currentThread().getId());

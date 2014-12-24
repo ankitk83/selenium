@@ -27,7 +27,7 @@ public class commonClass {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	 WebElement m1;
+	 WebElement e1;
 	ITestClass cls;
 	Thread th;
 //	
@@ -59,17 +59,17 @@ public class commonClass {
 	}
 	
 	public void click(){
-		System.out.println("clicking logging testing" + m1.toString());
-		m1.click();
+		System.out.println("clicking logging testing" + e1.toString());
+		e1.click();
 	}
 	
 	public void set(String string){
-		m1.sendKeys(string);
+		e1.sendKeys(string);
 		System.out.println(string);
 	}
 	
 	public Boolean hasText(String TextForValidation){
-		String tempTextVal = m1.getText();
+		String tempTextVal = e1.getText();
 		if(tempTextVal.contentEquals(TextForValidation) == true){
 			System.out.println("text exists...");
 		}

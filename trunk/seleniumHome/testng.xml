@@ -2,32 +2,37 @@
  
 <suite name="Suite1" thread-count="10"  parallel="tests" verbose="1" preserve-order="false"> 
  	<listeners>
-		<listener class-name="com.bugzilla.listerner.overrides.methondListener" />
-		<listener class-name="com.bugzilla.listerner.overrides.testListener" />
+		<!--  <listener class-name="com.bugzilla.listerner.overrides.methondListener" />
+		<listener class-name="com.bugzilla.listerner.overrides.testListener" />-->
 	</listeners> 
  <parameter name="browser" value="firefox"></parameter>
   <test name="Nopackage" >
 	<parameter name="environment" value="QA2"/>
 	 <parameter name="browser" value="firefox"></parameter> 
     <classes>
-       <class name="com.bugzilla.test.auth.BasicLoginLogout" />
-        <class name="com.bugzilla.test.searchBugs.PlainSearch" />
+        <class name="com.bugzilla.test.auth.BasicLoginLogout" />
+       <class name="com.bugzilla.test.searchBugs.PlainSearch" />
+       <class name="com.bugzilla.test.auth.PlainVanila" />
+       <class name="com.bugzilla.test.bug.createNew.CreateNewBug" /> 
     </classes>
   </test>
   <test name="Nopackage2" >
 	<parameter name="environment" value="QA2"/>
 	 <parameter name="browser" value="firefox"></parameter> 
     <classes>
-        <class name="com.bugzilla.test.auth.BasicLoginLogout" /> 
+        <class name="com.bugzilla.test.auth.BasicLoginLogout" />
        <class name="com.bugzilla.test.searchBugs.PlainSearch" />
+       <class name="com.bugzilla.test.auth.PlainVanila" />
+       <class name="com.bugzilla.test.bug.createNew.CreateNewBug" /> 
     </classes>
   </test>
  <test name="Nopackage1" >
  	 <parameter name="browser" value="firefox"></parameter> 
     <classes>
-       <class name="com.bugzilla.test.searchBugs.PlainSearch" /> 
-       <class name="com.bugzilla.test.bug.createNew.PlainVanila" />
-      <class name="com.bugzilla.test.bug.createNew.CreateNewBug" /> 
+        <class name="com.bugzilla.test.auth.BasicLoginLogout" />
+       <class name="com.bugzilla.test.searchBugs.PlainSearch" />
+       <class name="com.bugzilla.test.auth.PlainVanila" />
+       <class name="com.bugzilla.test.bug.createNew.CreateNewBug" /> 
     </classes>
   </test>
  </suite>
