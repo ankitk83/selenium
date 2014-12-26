@@ -2,6 +2,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<maven.build.timestamp.format>yyMMdd_HHmm</maven.build.timestamp.format>
+    <buildNumber>${maven.build.timestamp}</buildNumber>
+  </properties>
   <groupId>java</groupId>
   <artifactId>seleniumHome</artifactId>
   <version>0.0.1-SNAPSHOT</version>
@@ -10,14 +15,31 @@
   <name>seleniumHome</name>
   <url>http://maven.apache.org</url>
  <build>
+ 
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
+        <version>3.0</version>
         <configuration>
           <source>1.7</source>
           <target>1.7</target>
+      <!--     <properties>
+           <property>
+              <name>listener</name>
+              <value>com.bugzilla.listerner.overrides.methondListener</value>
+            </property>
+                    <property>
+                        <name>usedefaultlisteners</name>
+                        <value>false</value>
+                    </property>
+                    <property>
+                        <name>listener</name>
+                        <value>org.uncommons.reportng.HTMLReporter, org.uncommons.reportng.JUnitXMLReporter</value>
+                    </property>
+                </properties>
+                <workingDirectory>target/surefire/</workingDirectory>
+                <reportsDirectory>target/surefire-raeports${buildNumber}/</reportsDirectory> -->
         </configuration>
       </plugin>
       <plugin>
@@ -28,15 +50,37 @@
           <suiteXmlFiles>
             <suiteXmlFile>testng.xml</suiteXmlFile>
           </suiteXmlFiles>
-          <scopr>test</scopr>
+          <scope>test</scope>
+          <testFailureIgnore>true</testFailureIgnore>
         </configuration>
       </plugin>
     </plugins>
     
   </build>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+ <reporting>
+    <plugins>
+    <!-- TestNG-xslt related configuration. -->
+      <plugin>
+        <groupId>org.reportyng</groupId>
+        <artifactId>reporty-ng</artifactId>
+        <version>1.2</version>
+        <configuration>
+          <!-- Output directory for the testng xslt report -->
+          <outputDir>/target/testng-xslt-report</outputDir>
+          <sortTestCaseLinks>true</sortTestCaseLinks>
+          <testDetailsFilter>FAIL,SKIP,PASS,CONF,BY_CLASS</testDetailsFilter>
+          <showRuntimeTotals>true</showRuntimeTotals>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+ 
+  <pluginRepositories>
+    <pluginRepository>
+      <id>reporty-ng</id>
+      <url>https://github.com/cosminaru/reporty-ng/raw/master/dist/maven</url>
+    </pluginRepository>
+  </pluginRepositories>
 
   <dependencies>
  <dependency>
@@ -65,5 +109,11 @@
  	<version>2.18</version>
  	<type>maven-plugin</type>
  </dependency>
+ <dependency>
+ 	<groupId>org.uncommons</groupId>
+ 	<artifactId>reportng</artifactId>
+ 	<version>1.1.4</version>
+ </dependency>
   </dependencies>
+  
 </project>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
@@ -42,6 +43,7 @@ public class TestBase  {
 	
 	public EventFiringWebDriver eDriver;
 	private Platform platform;
+	private String host;
 	public static HashMap<String, String> m1 = new HashMap<String, String>();
 	
 	
@@ -78,29 +80,39 @@ public class TestBase  {
 		capability.setBrowserName(this.oBrows);
 		String CapabilityURL = rm1.getEnvVars(this.oBrows);
 		platform = rm1.getPlatform(CapabilityURL);		
-//		string sessionId = (string) driver.Capabilities.GetCapability("webdriver.remote.sessionid");
-	
+
+//		platform = platform.LINUX; // also to be set dynamically
+//		platform = platform.WINDOWS; // also to be set dynamically
 		
+		
+//		System.out.println(rm1.getEnvVars(this.oBrows));
+//		String remoteHostIP = rm1.getEnvVars(this.oBrows);
+//		System.out.println(remoteHostIP);
 		System.out.println(CapabilityURL);
 		
 		// Set the platform we want our tests to run on     
 		capability.setPlatform(platform);
 		System.out.println(capability.getBrowserName());
-		BrowserDriver = new RemoteWebDriver(new URL("http://" + CapabilityURL.toString() + ":4444/wd/hub"), capability);
-	
+		BrowserDriver = new RemoteWebDriver(new URL("http://" + CapabilityURL + ":4444/wd/hub"), capability);
+
+		BrowserDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		
 		/*
 		 * this implementation did not work. a seperate util funciton has to be written to identify the driver host.
 		 */
-		BrowserDriver = new RemoteWebDriver(new URL("http://127.0.0.1"), capability); 
+//		BrowserDriver = new RemoteWebDriver(new URL("http://127.0.0.1"), capability); 
 		
 		
+		/*
+		 * this code works fine. all we need to do is include this in the function to handle local/remote host assignments
+		 */
+
 
 //		setData(methodName);
 		eDriver  = new EventFiringWebDriver(this.BrowserDriver);
-	
-//		oc = new OverrideClass();
-//		eDriver.register(oc);
+		oc = new OverrideClass();
+		eDriver.register(oc);
+//		fn_loadClasses(methodName,eDriver);
 
 	}
 	
@@ -110,6 +122,7 @@ public class TestBase  {
 		}
 		if(browsVal==null){
 			this.oBrows = "firefox";
+//			this.host = "localhost";
 		}
 		
 	}
