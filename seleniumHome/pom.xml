@@ -52,6 +52,7 @@
           </suiteXmlFiles>
           <scope>test</scope>
           <testFailureIgnore>true</testFailureIgnore>
+          <rerunFailingTestsCount>2</rerunFailingTestsCount>
         </configuration>
       </plugin>
     </plugins>
